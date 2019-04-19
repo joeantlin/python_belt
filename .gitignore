@@ -1,0 +1,4 @@
+__pychace__/
+.vscode/
+ven/
+db.sqlite3

@@ -1,0 +1,22 @@
+from apps.log_app.models import *
+from apps.main.models import *
+
+user = models.ForeignKey(User, related_name="user")
+usersof = models.ManyToManyField(User, related_name="ofusers")
+
+User.objects.all()
+Onemany.objects.all()
+Manymany.objects.all()
+
+theuser = User.objects.get(id=1)
+theone = OneMany.objects.get(id=1)
+makeone = OneMany.objects.create(user=theuser)
+readone = OneMany.objects.filter(user=theuser)
+
+theuser = User.objects.get(id=1)
+themany = ManyMany.objects.get(id=2)
+makemany1 = themany.usersof.add.(theuser)
+readmany1 = themany.usersof.id
+
+makemany2 = theuser.ofusers.add.(themany)
+readmany2 = theuser.ofusers.id
