@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Trip</title>
+    {% load static %}	
+    <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages red">
+            {% for message in messages %}
+                <li {% if message.tags %} 
+                        class="{{ message.tags }}"
+                    {% endif %}>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="wrapper">
+        <div class="header">
+            <div class="nav1">
+                <h1>Hello {{ request.session.name }}! Let's Edit your trip!</h1>
+            </div>
+            <div class="nav4">
+                <p><a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a></p> 
+            </div>
+        </div>
+
+        <div class="main">
+            <form action="/update/{{ request.session.id }}" method="post">
+                {% csrf_token %}
+                <label>
+                    Destination:
+                    <input type="text" name="dest" value="{{trip.destination}}">
+                </label>
+                <label>
+                    Start Date:
+                    <input type="date" name="start" value="{{trip.start|date:'Y-m-d'}}">
+                </label>
+                <label>
+                    End Date:
+                    <input type="date" name="end" value="{{trip.end|date:'Y-m-d'}}">
+                </label>
+                <label>
+                    Plan:
+                    <textarea name="plan">{{trip.plan}}</textarea>
+                </label>
+                <input type="hidden" value="{{ trip.id }}" name="tripid">
+                <button type="reset">Cancel</button>
+                <input type="submit" value="Submit">
+            </form>
+
+        </div>
+        <div class="footer">
+            
+        </div>
+    </div>
+    
+</body>
+</html>

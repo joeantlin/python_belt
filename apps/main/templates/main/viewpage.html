@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View Trip</title>
+    {% load static %}	
+    <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages green">
+            {% for message in messages %}
+                <li {% if message.tags %} 
+                        class="{{ message.tags }}"
+                    {% endif %}>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="wrapper">
+        <div class="header">
+            <div class="nav1">
+                <h1>Hello {{ request.session.name }}! Read about this trip!</h1>
+            </div>
+            <div class="nav4">
+                <p><a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a></p> 
+            </div>
+        </div>
+
+        <div class="main">
+            <h2>{{ thetrip.destination }}</h2>
+            <div>
+                <p>Start Date: {{ thetrip.start }}</p>
+                <p>End Date: {{ thetrip.end }}</p>
+                <p>Created On: {{ thetrip.created_at.date }}</p>
+                <p>Updated on: {{ thetrip.updated_at.date }}</p>
+                <p>Plan: {{ thetrip.plan }}</p>
+                <p>Created by: {{ thetrip.host.first_name }} {{ thetrip.host.last_name }}</p>
+            </div>
+
+            <div>
+                <h3>People who've joined the trip:</h3>
+                {% for go in going %}
+                    <p>{{ go.first_name }} {{ go.last_name }}</p>
+                {% endfor %}
+            </div>
+    </div>
+</body>
+</html>

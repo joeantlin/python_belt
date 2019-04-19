@@ -26,7 +26,7 @@ def register(request):
             request.session["name"] = user.first_name
             request.session["id"] = user.id
             messages.success(request, 'You have succefully made an account')
-            return redirect('/main')
+            return redirect('/dashboard')
 
 def login(request):
     if request.method == "POST":
@@ -50,7 +50,7 @@ def login(request):
                     request.session["name"] = user.first_name
                     request.session["id"] = user.id
                     messages.success(request, 'You have succefully logged in')
-                    return redirect("/main")
+                    return redirect("/dashboard")
                 else:
                     print("failed password")
                     messages.error(request, 'Incorrect Login Info') 

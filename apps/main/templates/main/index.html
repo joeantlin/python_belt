@@ -24,57 +24,80 @@
     <div class="wrapper">
         <div class="header">
             <div class="nav1">
-                <h1>Header</h1>
+                <h1>Hello {{ request.session.name }}</h1>
             </div>
             <div class="nav4">
-                <p><a href="/main">Home</a> | <a href="/logout">Logout</a></p> 
+                <a href="/trips/new">Create</a>|
+                <a href="/logout">Logout</a></p>
             </div>
         </div>
 
         <div class="main">
-            <h2>Words</h2>
+            <h2>My Trips</h2>
 
-            <div>
-                <p>Words: {{ placeholder }}</p>
-            </div>
-
-            <table>
+            <table class="full">
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Destination</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Plan</th>
+                    <th>Actions</th>
                 </tr>
-                {% for place in placeholder %}
+                {% for trip in my_trips %}
                     <tr>
-                        <td>{{ placeholder }}</td>
-                        <td>{{ placeholder }}</td>
-                        <td><a href="/read/{{ placeholder.id }}">view</a>
-                            <a href="/create/{{ request.session.id }}">create</a>|
-                            <a href="/update/{{ request.session.id }}">update</a>|
-                            <a href="/delete/{{ request.session.id }}">delete</a>
+                        <td><a href="/read/{{ trip.id }}">{{ trip.destination }}</a></td>
+                        <td>{{ trip.start }}</td>
+                        <td>{{ trip.end }}</td>
+                        <td>{{ trip.plan }}</td>
+                        <td>
+                            <a href="/trips/edit/{{ trip.id }}">Edit</a>|
+                            <a href="/delete/{{ request.session.id }}/{{ trip.id }}">Cancel</a>
                         </td>
                     </tr>
                 {% endfor %}
             </table>
 
+            <h2>Trip's I've joined</h2> 
+            <table class="full">
+                <tr>
+                    <th>Destination</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Plan</th>
+                </tr>
+                {% for trip in joined_trips %}
+                    <tr>
+                        <td><a href="/read/{{ trip.id }}">{{ trip.destination }}</a></td>
+                        <td>{{ trip.start }}</td>
+                        <td>{{ trip.end }}</td>
+                        <td>{{ trip.plan }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
 
-            <form action="" method="post">
-                {% csrf_token %}
-                <label>
-                    *label*
-                    <input type="text" name="">
-                </label>
-                <label>
-                    *label*
-                    <input type="text" name="">
-                </label>
-                <input type="submit" value="submit">
-            </form>
-
-        </div>
-        <div class="footer">
-            
+            <h2>Other People's Trips</h2> 
+            <table class="full">
+                <tr>
+                    <th>Destination</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Plan</th>
+                    <th>Actions</th>
+                </tr>
+                {% for trip in other_trips %}
+                    <tr>
+                        <td><a href="/read/{{ trip.id }}">{{ trip.destination }}</a></td>
+                        <td>{{ trip.start }}</td>
+                        <td>{{ trip.end }}</td>
+                        <td>{{ trip.plan }}</td>
+                        <td>
+                            <a href="/join/{{ trip.id }}">Join</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
+    
 </body>
 </html>
