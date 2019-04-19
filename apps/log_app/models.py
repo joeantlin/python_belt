@@ -9,7 +9,7 @@ class UserManager(models.Manager):
         errors = {}
         if len(postData['fname']) < 2:
             errors["fname"] = "First Name should be at least 2 characters"
-        if len(postData['fname']) < 2:
+        if len(postData['lname']) < 2:
             errors["lname"] = "Last Name should be at least 2 characters"
         if not EMAIL_REGEX.match(postData['email']):
             errors["email"] = "Email is not formatted correctly"

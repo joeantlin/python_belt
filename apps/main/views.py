@@ -15,8 +15,6 @@ def mainindex(request):
         "other_trips": Trip.objects.exclude(attendees=myid).exclude(host=myid).order_by("-created_at"),
         "joined_trips": Trip.objects.filter(attendees=myid).order_by("-created_at"),
     }
-    print(str(datetime.date.today()))
-    print(str(mydate))
     return render(request, "main/index.html", context)
 
 #View Trip
