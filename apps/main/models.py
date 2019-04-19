@@ -28,7 +28,7 @@ class Trip(models.Model):
     start = models.DateField()
     end = models.DateField()
     plan = models.TextField()
-    host = models.ForeignKey(User, related_name="trip")
+    host = models.ForeignKey(User, related_name="trip", null=True, on_delete=models.SET_NULL)
     attendees = models.ManyToManyField(User, related_name="trips")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
