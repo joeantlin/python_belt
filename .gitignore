@@ -2,4 +2,3 @@ __pychace__/
 .vscode/
 ven/
 db.sqlite3
-queries.txt
